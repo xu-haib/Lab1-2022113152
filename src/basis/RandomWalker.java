@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
+//在C4上，对2个文件进行修改并提交；
 /**
  * RandomWalker类实现随机游走功能，模拟在有向图上随机移动的过程。
  * 它实现了Runnable接口，可以作为线程运行，用于实时显示游走路径。

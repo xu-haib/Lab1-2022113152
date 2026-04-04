@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.Scanner;
 
+//对提交的部分文件进行再次修改
+//在C4上，对2个文件进行修改并提交；
 /**
  * GraphProcessor类是一个工具类，提供静态方法来处理图的生成和文本解析。
  * 它不存储状态，所有方法都是静态的，用于从文件生成有向图和处理文本。
