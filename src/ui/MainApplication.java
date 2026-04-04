@@ -9,6 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 //对B2进行修改
+//对Lab1进行若干修改，对其进行本地仓库提交操作
 /**
  * MainApplication类是JavaFX应用的入口点，负责启动主窗口。
  * 它继承自Application类，加载主界面FXML文件，并设置窗口属性。
