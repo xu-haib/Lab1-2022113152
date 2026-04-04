@@ -38,6 +38,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+//对B2进行修改
 public class BaseWindowController {
 	@FXML private MenuBar menuBar;				//菜单栏
 	@FXML private MenuItem saveMenuItem;		//“另存为”菜单项
