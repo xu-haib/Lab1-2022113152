@@ -3,6 +3,7 @@ package basis;
 import java.util.HashMap;
 import java.util.HashSet;
 
+//对提交的部分文件进行修改
 /**
  * Vertex类表示有向图中的一个顶点，通常代表一个单词。
  * 在图论中，顶点是图的基本元素，这里用来存储单词及其关系。
