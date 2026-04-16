@@ -57,7 +57,11 @@ public class BaseWindowController {
 	@FXML private StackPane stackPane;			//控制按钮面板的容器
 	
 	private DirectedGraph graph;				//有向图
-	private File dataFile;						//源文本文件对象
+	private File dataFile;                        //源文本文件对象
+
+	void setGraph(DirectedGraph graph) {
+		this.graph = graph;
+	}						//源文本文件对象
 	
 	private static HashMap<String, PointBox> points = new HashMap<>();				//<顶点名称,绘图面板中对应的绘图顶点>
 	private static HashMap<Arrow, Pair<String, String>> edges = new HashMap<>();	//<绘图有向边,<起点名称,终点名称>>
@@ -671,7 +675,7 @@ public class BaseWindowController {
 	 * @param word2 第二个单词
 	 * @return 桥接词查询结果
 	 */
-	private String queryBridgeWords(String word1, String word2) {
+	String queryBridgeWords(String word1, String word2) {
 		Vertex vertex1 = findVertex(word1);
 		Vertex vertex2 = findVertex(word2);
 		if (vertex1 == null && vertex2 != null) {
