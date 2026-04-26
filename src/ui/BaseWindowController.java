@@ -751,12 +751,12 @@ public class BaseWindowController {
 	}
 
 	/**
-	 * 求解并在绘图面板上标注最短路径，返回最短路径的长度信息
+	 * 求解并在绘图面板上标注最短路径，返回最短路径的长度信息及具体路径
 	 * @param startName 路径起点名称
 	 * @param endName 路径终点名称
-	 * @return 最短路径的长度信息
+	 * @return 最短路径的长度及路径字符串
 	 */
-	private String calcShortestPath(String startName, String endName) {
+	public String calcShortestPath(String startName, String endName) {
 		ArrayList<Vertex> vertices = this.graph.getVertices();
 		Vertex startVertex = null;
 		Vertex endVertex = null;
@@ -768,19 +768,43 @@ public class BaseWindowController {
 				endVertex = v;
 			}
 		}
+
+		// 1. 判空拦截
 		if (startVertex == null || endVertex == null) {
 			return "No " + startName + " or " + endName + " in the graph!";
 		}
-		HashMap<Vertex, HashSet<Vertex>> path = dijkstra(endVertex);	//用于记录最短路径（实际上是一个有向图的子图，因为有向图可能有多条）
+
+		// 2. 执行 Dijkstra
+		HashMap<Vertex, HashSet<Vertex>> pathMap = dijkstra(endVertex);
 		int i = vertices.indexOf(startVertex);
-		//若起点到终点的最短路径长度为无穷大，则没有最短路径
+
+		// 3. 不可达拦截
 		if (distance[i] == infinity) {
 			return "No path from " + startName + " to " + endName + "!";
 		}
-		//在绘图面板上展示最短路径
-		showPath(startVertex, endVertex, path);
-		//返回最短路径长度
-		return "The length of the shortest path is " + distance[i];
+
+		// 4. 在 UI 面板画图
+		showPath(startVertex, endVertex, pathMap);
+
+		// ==========================================
+		// 5. 【新增逻辑】遍历 pathMap 构建路径字符串
+		// ==========================================
+		StringBuilder pathStr = new StringBuilder(startVertex.name);
+		Vertex current = startVertex;
+
+		// 从起点一直走到终点
+		while (current != endVertex) {
+			HashSet<Vertex> nextNodes = pathMap.get(current);
+			if (nextNodes == null || nextNodes.isEmpty()) {
+				break; // 防御性编程，正常不会走到这
+			}
+			// 因为可能有多条等长的最短路径，为了输出文本，我们默认取第一条分支
+			current = nextNodes.iterator().next();
+			pathStr.append(" -> ").append(current.name);
+		}
+
+		// 6. 返回包含了完整路径和长度的字符串
+		return "Path: " + pathStr.toString() + " (Length: " + distance[i] + ")";
 	}
 
 	/**
